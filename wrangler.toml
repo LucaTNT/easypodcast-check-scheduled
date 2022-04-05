@@ -1,0 +1,11 @@
+name = "easypodcast-check-scheduled"
+type = "javascript"
+
+account_id = ""
+workers_dev = true
+route = ""
+zone_id = ""
+compatibility_date = "2022-04-05"
+
+[triggers]
+crons = ["*/5 15-16 * * FRI"]
