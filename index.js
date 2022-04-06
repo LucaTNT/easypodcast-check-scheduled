@@ -10,9 +10,9 @@ addEventListener('fetch', (event) => {
   event.respondWith(handleRequest(event.request))
 })
 
-addEventListener('scheduled', event => {
-  event.waitUntil(handleRequest(event));
-});
+addEventListener('scheduled', (event) => {
+  event.waitUntil(handleRequest(event))
+})
 
 async function sendTelegramMessage(message, chat_id) {
   console.log(TELEGRAM_BOT_TOKEN)
