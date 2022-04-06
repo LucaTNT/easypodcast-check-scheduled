@@ -46,7 +46,7 @@ async function handleRequest(request) {
   const scheduled_count = resp['scheduled_episodes']
 
   const message_sent =
-    scheduled_count > 0
+    scheduled_count == 0
       ? await sendTelegramMessage(
           `🚨🚨🚨 Nessuna puntata programmata! ⏰⏰⏰`,
           TELEGRAM_CHAT_ID,
