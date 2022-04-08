@@ -14,6 +14,22 @@ addEventListener('scheduled', (event) => {
   event.waitUntil(handleRequest(event))
 })
 
+async function getLastEpisodePublishDate() {
+  let req = await fetch(`${API_ENDPOINT}/show/${SHOW_NAME}/lastEpisode`)
+  let resp = await req.json()
+
+  return resp['episode']['timestamp']
+}
+
+async function episodePublishedToday() {
+  const published_timestamp = await getLastEpisodePublishDate()
+
+  const published_date = new Date(published_timestamp * 1000)
+  const today = new Date()
+
+  return today.toDateString() == published_date.toDateString()
+}
+
 async function sendTelegramMessage(message, chat_id) {
   console.log(TELEGRAM_BOT_TOKEN)
   let req = await fetch(
@@ -36,21 +52,26 @@ async function sendTelegramMessage(message, chat_id) {
   return success
 }
 
-/**
- * Respond with hello worker text
- * @param {Request} request
- */
-async function handleRequest(request) {
+async function getScheduledEpisodesCount() {
   let req = await fetch(
     `${API_ENDPOINT}/show/${SHOW_NAME}/scheduledEpisodes`,
     init,
   )
   let resp = await req.json()
-  const scheduled_count = resp['scheduled_episodes']
+  return resp['scheduled_episodes']
+}
+
+/**
+ * Respond with hello worker text
+ * @param {Request} request
+ */
+async function handleRequest(request) {
+  const scheduled_count = await getScheduledEpisodesCount()
 
   let message_sent = false
+  const episode_published_today = await episodePublishedToday()
 
-  if (scheduled_count == 0) {
+  if (scheduled_count == 0 && !episode_published_today) {
     console.log(`${scheduled_count} episodes scheduled, SENDING MESSAGE`)
     message_sent = await sendTelegramMessage(
       `🚨🚨🚨 Nessuna puntata programmata! ⏰⏰⏰`,
@@ -64,6 +85,7 @@ async function handleRequest(request) {
     scheduled_episodes_present: scheduled_count > 0,
     scheduled_episodes: scheduled_count,
     message_sent: message_sent,
+    episode_published_today: episode_published_today
   }
 
   return new Response(JSON.stringify(result), {
