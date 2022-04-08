@@ -14,6 +14,13 @@ addEventListener('scheduled', (event) => {
   event.waitUntil(handleRequest(event))
 })
 
+async function getLastEpisodePublishDate() {
+  let req = await fetch(`${API_ENDPOINT}/show/${SHOW_NAME}/lastEpisode`)
+  let resp = await req.json()
+
+  return resp['episode']['timestamp']
+}
+
 async function sendTelegramMessage(message, chat_id) {
   console.log(TELEGRAM_BOT_TOKEN)
   let req = await fetch(
