@@ -6,11 +6,13 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "format": "prettier --write '**/*.{js,css,json,md}'"
+    "format": "prettier --write '**/*.{js,css,json,md}'",
+    "dev": "miniflare index.js --watch --debug"
   },
   "author": "Luca Zorzi <luca@lucazorzi.net>",
   "license": "MIT",
   "devDependencies": {
+    "miniflare": "^2.4.0",
     "prettier": "1.19.1"
   }
 }
