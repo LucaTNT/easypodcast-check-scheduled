@@ -46,7 +46,7 @@ async function sendTelegramMessage(message, chat_id) {
   const resp = await req.json()
   const success = resp['ok']
 
-  console.log(success ? 'Message sent' : 'Error sending message')
+  console.log(success ? 'Message sent.' : 'Error sending message.')
 
   return success
 }
@@ -71,13 +71,13 @@ async function handleRequest(request) {
   const episode_published_today = await episodePublishedToday()
 
   if (scheduled_count == 0 && !episode_published_today) {
-    console.log(`${scheduled_count} episodes scheduled, SENDING MESSAGE`)
+    console.log(`${scheduled_count} episodes scheduled, SENDING MESSAGE.`)
     message_sent = await sendTelegramMessage(
       `🚨🚨🚨 Nessuna puntata programmata! ⏰⏰⏰`,
       TELEGRAM_CHAT_ID,
     )
   } else {
-    console.log(`${scheduled_count} episodes scheduled, not sending message`)
+    console.log(`${scheduled_count} episodes scheduled, not sending message.`)
   }
 
   const result = {
