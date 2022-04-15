@@ -31,7 +31,6 @@ async function episodePublishedToday() {
 }
 
 async function sendTelegramMessage(message, chat_id) {
-  console.log(TELEGRAM_BOT_TOKEN)
   let req = await fetch(
     `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`,
     {
