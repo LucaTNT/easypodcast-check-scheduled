@@ -2,7 +2,7 @@
   "private": true,
   "name": "easypodcast-check-scheduled",
   "version": "1.0.0",
-  "description": "A template for kick starting a Cloudflare Workers project",
+  "description": "A worker that checks if a new episode of EasyApple has been scheduled and notifies Federico otherwise.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -12,7 +12,7 @@
   "author": "Luca Zorzi <luca@lucazorzi.net>",
   "license": "MIT",
   "devDependencies": {
-    "miniflare": "^2.4.0",
+    "miniflare": "^3.20250129.0",
     "prettier": "1.19.1"
   }
 }
