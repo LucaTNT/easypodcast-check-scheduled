@@ -7,12 +7,12 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "format": "prettier --write '**/*.{js,css,json,md}'",
-    "dev": "miniflare index.js --watch --debug"
+    "dev": "npx wrangler dev"
   },
   "author": "Luca Zorzi <luca@lucazorzi.net>",
   "license": "MIT",
   "devDependencies": {
-    "miniflare": "^3.20250129.0",
-    "prettier": "1.19.1"
+    "miniflare": "^4.20251202.1",
+    "prettier": "3.7.4"
   }
 }
